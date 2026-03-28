@@ -20,11 +20,11 @@ Objectif :
 
 ## 🔹 1.1 Outils à installer
 
-* PHP 8.x
-* MySQL / MariaDB
-* Docker + Docker Compose
+* PHP 8.x (OK)
+* MySQL / MariaDB (OK)
+* Docker + Docker Compose (OK)
 * Navigateur (Chrome recommandé)
-* VS Code
+* VS Code (OK)
 
 ---
 
@@ -39,16 +39,16 @@ Objectif :
 
 ## 🔹 1.3 Vérifications
 
-✔️ `php -v`
-✔️ `docker -v`
-✔️ `docker-compose -v`
-✔️ accès navigateur localhost
+✔️ `php -v` (OK)
+✔️ `docker -v` (OK)
+✔️ `docker-compose -v` (OK)
+✔️ accès navigateur localhost (OK)
 
 ---
 
 # 🐳 🧱 2. Initialisation projet Docker
 
-## 🔹 2.1 Créer structure
+## 🔹 2.1 Créer structure (OK)
 
 ```plaintext
 /projet
@@ -62,24 +62,24 @@ Objectif :
 
 ## 🔹 2.2 Config Docker
 
-* Créer `docker-compose.yml`
-* Créer Dockerfile PHP
-* Configurer Nginx
-
+* Créer `docker-compose.yml`(OK)
+* Créer Dockerfile PHP (OK)
+* Configurer Nginx (OK)
+ 
 ---
 
 ## 🔹 2.3 Lancer environnement
 
 ```bash
-docker-compose up --build
+docker-compose up --build (OK)
 ```
 
 ---
 
 ## 🧪 TEST
 
-✔️ Accès : `http://localhost:8080`
-✔️ Page PHP s’affiche
+✔️ Accès : `http://localhost:8080` (OK)
+✔️ Page PHP s’affiche (OK)
 
 ---
 
@@ -87,15 +87,15 @@ docker-compose up --build
 
 ## 🔹 3.1 Création DB
 
-* Base : `guerre_iran`
-* Table : `article`
+* Base : `guerre_iran` (OK)
+* Table : `article` (OK)
 
 ---
 
 ## 🔹 3.2 Structure table
 
 ```sql
-id, titre, contenu, date_creation
+id, titre, contenu, date_creation (OK)
 ```
 
 ---
@@ -108,8 +108,8 @@ Créer `config.php`
 
 ## 🧪 TEST
 
-✔️ Connexion réussie
-✔️ SELECT simple fonctionne
+✔️ Connexion réussie (OK)
+✔️ SELECT simple fonctionne (OK)
 
 ---
 
