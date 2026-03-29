@@ -1,0 +1,3 @@
+# Ignorer le contenu du dossier uploads mais garder le dossier
+app/uploads/*
+!app/uploads/.gitkeep
