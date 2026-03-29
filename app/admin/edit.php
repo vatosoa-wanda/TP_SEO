@@ -26,6 +26,7 @@ if (!$article) { header('Location: list.php'); exit; }
       images_upload_url: 'upload.php',
       automatic_uploads: true,
       images_reuse_filename: true,
+      convert_urls: false,
     });
   </script>
   <style>
