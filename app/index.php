@@ -1,114 +1,222 @@
 <?php
 require_once 'includes/config.php';
 
-// Recuperer tous les articles
-$stmt = $pdo->query("SELECT id, titre, slug, contenu, meta_description, date_creation FROM article ORDER BY date_creation DESC");
+$stmt    = $pdo->query("SELECT id, titre, slug, meta_description, date_creation FROM article ORDER BY date_creation DESC");
 $articles = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Actualites et analyses sur le conflit en Iran - Informations, contexte historique et impact humanitaire.">
-    <title>Le Monde - Conflit en Iran</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: Georgia, 'Times New Roman', serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: #f5f5f5;
-        }
-        header {
-            background: #1a1a1a;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        header h1 { font-size: 2.5rem; font-weight: normal; }
-        nav {
-            background: #333;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-        nav a:hover { text-decoration: underline; }
-        main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .article-card {
-            background: white;
-            padding: 30px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        .article-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        .article-card h2 a {
-            color: #1a1a1a;
-            text-decoration: none;
-        }
-        .article-card h2 a:hover { text-decoration: underline; }
-        .article-card .meta {
-            color: #666;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-        .article-card p {
-            color: #444;
-        }
-        footer {
-            background: #1a1a1a;
-            color: #aaa;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Suivez l'actualité du conflit en Iran : analyses, contexte historique et impact humanitaire.">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Conflit en Iran - Actualités | Le Monde">
+  <meta property="og:description" content="Suivez l'actualité du conflit en Iran : analyses, contexte historique et impact humanitaire.">
+  <meta property="og:type"        content="website">
+
+  <title>Conflit en Iran - Actualités et analyses | Le Monde</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+      background: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      border-bottom: 3px solid #c00;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: normal;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    /* NAV */
+    nav {
+      background: #222;
+      text-align: center;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: Arial, sans-serif;
+    }
+    nav a:hover { color: white; border-bottom: 2px solid #c00; padding-bottom: 2px; }
+
+    /* MAIN */
+    main {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* TITRE SECTION */
+    .section-titre {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c00;
+      border-bottom: 2px solid #c00;
+      padding-bottom: 8px;
+      margin-bottom: 30px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ARTICLE CARD */
+    .article-card {
+      background: white;
+      padding: 25px 30px;
+      margin-bottom: 15px;
+      border-left: 4px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .article-card:hover {
+      border-left-color: #c00;
+    }
+
+    .article-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      font-weight: normal;
+    }
+    .article-card h2 a {
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+    .article-card h2 a:hover {
+      color: #c00;
+    }
+
+    .article-card .meta {
+      font-size: 0.8rem;
+      color: #999;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .article-card .description {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .lire-plus {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #c00;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .lire-plus:hover { text-decoration: underline; }
+
+    /* AUCUN ARTICLE */
+    .vide {
+      text-align: center;
+      color: #999;
+      padding: 60px 0;
+      font-style: italic;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a1a1a;
+      color: #666;
+      text-align: center;
+      padding: 25px;
+      margin-top: 60px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+    footer span { color: #c00; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Le Monde</h1>
-    </header>
-    <nav>
-        <a href="/">Accueil</a>
-        <a href="#">International</a>
-        <a href="#">Politique</a>
-        <a href="#">Economie</a>
-    </nav>
-    <main>
-        <h2 style="margin-bottom: 30px; font-size: 1.8rem;">Dossier : Conflit en Iran</h2>
 
-        <?php foreach ($articles as $article): ?>
+  <!-- HEADER -->
+  <header>
+    <h1>Le Monde</h1>
+    <p>Actualités &amp; Analyses — Conflit en Iran</p>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/">Accueil</a>
+    <a href="#">International</a>
+    <a href="#">Politique</a>
+    <a href="#">Économie</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <p class="section-titre">Dossier : Conflit en Iran</p>
+
+    <?php if (empty($articles)): ?>
+      <p class="vide">Aucun article publié pour le moment.</p>
+
+    <?php else: ?>
+      <?php foreach ($articles as $article): ?>
         <article class="article-card">
-            <h2>
-                <a href="/article/<?= $article['id'] ?>/<?= $article['slug'] ?>">
-                    <?= htmlspecialchars($article['titre']) ?>
-                </a>
-            </h2> 
-            <p class="meta">
-                Publie le <?= date('d/m/Y', strtotime($article['date_creation'])) ?>
+
+          <h2>
+            <a href="/article/<?= $article['id'] ?>/<?= htmlspecialchars($article['slug']) ?>">
+              <?= htmlspecialchars($article['titre']) ?>
+            </a>
+          </h2>
+
+          <p class="meta">
+            Publié le <?= date('d/m/Y \à H\hi', strtotime($article['date_creation'])) ?>
+          </p>
+
+          <?php if (!empty($article['meta_description'])): ?>
+            <p class="description">
+              <?= htmlspecialchars($article['meta_description']) ?>
             </p>
-            <p><?= htmlspecialchars($article['meta_description']) ?></p>
-            <div class="contenu">
-                <?= $article['contenu'] ?>
-            </div>
+          <?php endif; ?>
+
+          <a class="lire-plus"
+             href="/article/<?= $article['id'] ?>/<?= htmlspecialchars($article['slug']) ?>">
+            Lire la suite →
+          </a>
+
         </article>
-        <?php endforeach; ?>
-    </main>
-    <footer>
-        <p>&copy; 2024 Le Monde - Projet SEO</p>
-    </footer>
+      <?php endforeach; ?>
+    <?php endif; ?>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <?= date('Y') ?> <span>Le Monde</span> — Projet Web Design</p>
+  </footer>
+
 </body>
 </html>
