@@ -229,19 +229,19 @@ images_upload_url: 'upload.php'  (OK)
 
 ## 🔹 6.2 Page détail article
 
-* afficher contenu HTML
+* afficher contenu HTML (ok)
 
 ---
 
 ## 🧪 TEST
 
-✔️ HTML bien rendu
-✔️ images visibles
-✔️ tableau affiché correctement
+✔️ HTML bien rendu (ok)
+✔️ images visibles (ok)
+✔️ tableau affiché correctement (ok)
 
 ---
 
-# 🔗 🔍 7. URL rewriting (SEO)
+# 🔗 🔍 7. URL rewriting (SEO) 
 
 ---
 
@@ -259,14 +259,14 @@ images_upload_url: 'upload.php'  (OK)
 
 ## 🔹 7.3 Config serveur
 
-* Nginx rewrite
+* Nginx rewrite (ok)
 
 ---
 
 ## 🧪 TEST
 
-✔️ URL propre fonctionne
-✔️ accès article OK
+✔️ URL propre fonctionne 
+✔️ accès article OK (ok)
 
 ---
 
