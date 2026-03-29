@@ -119,7 +119,7 @@ Créer `config.php` (ok)
 
 ## 🔹 4.1 Page ajout article
 
-* `admin/add.php`
+* `admin/add.php` (OK)
 * Formulaire :
 
   * titre (ok)
@@ -157,30 +157,30 @@ Créer `config.php` (ok)
 
 ## 🔹 4.4 Liste des articles
 
-* `admin/list.php`
-* afficher tableau
+* `admin/list.php` (OK)
+* afficher tableau (OK)
 
 ---
 
 ## 🔹 4.5 Modifier article
 
-* `edit.php`
-* pré-remplir TinyMCE
+* `edit.php` (OK)
+* pré-remplir TinyMCE (OK)
 
 ---
 
 ## 🔹 4.6 Supprimer article
 
-* bouton delete
+* bouton delete (OK)
 
 ---
 
 ## 🧪 TEST CRUD COMPLET
 
 ✔️ Create (ok)
-✔️ Read
-✔️ Update
-✔️ Delete
+✔️ Read (OK)
+✔️ Update (OK)
+✔️ Delete (OK)
 
 ---
 
@@ -191,7 +191,7 @@ Créer `config.php` (ok)
 ## 🔹 5.1 Config TinyMCE
 
 ```js
-images_upload_url: 'upload.php' 
+images_upload_url: 'upload.php'  (OK)
 ```
 
 ---
