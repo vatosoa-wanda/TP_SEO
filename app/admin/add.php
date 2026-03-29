@@ -11,6 +11,9 @@
       plugins: 'lists link image table code',
       toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
       // language: 'fr_FR' // optionnel si vous avez le fichier de langue français
+      images_upload_url: 'upload.php',
+      automatic_uploads: true,
+      images_reuse_filename: true,
     });
   </script>
 </head>

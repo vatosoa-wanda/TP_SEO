@@ -102,7 +102,7 @@ id, titre, contenu, date_creation (OK)
 
 ## 🔹 3.3 Connexion PHP
 
-Créer `config.php`
+Créer `config.php` (ok)
 
 ---
 
@@ -122,36 +122,36 @@ Créer `config.php`
 * `admin/add.php`
 * Formulaire :
 
-  * titre
-  * contenu (TinyMCE)
+  * titre (ok)
+  * contenu (TinyMCE) (ok)
 
 ---
 
 ## 🔹 4.2 Intégration TinyMCE
 
-* Ajouter script CDN ou local
-* Initialiser `tinymce.init()`
+* Ajouter script CDN ou local  (on a local) (ok) 
+* Initialiser `tinymce.init()` (ok)
 
 ---
 
 ## 🧪 TEST
 
-✔️ textarea transformé en éditeur
+✔️ textarea transformé en éditeur (ok)
 ✔️ boutons visibles
 
 ---
 
 ## 🔹 4.3 Sauvegarde article
 
-* `admin/save.php`
-* INSERT en base
+* `admin/save.php` (ok)
+* INSERT en base (ok)
 
 ---
 
 ## 🧪 TEST
 
-✔️ données enregistrées
-✔️ HTML présent en base
+✔️ données enregistrées (ok)
+✔️ HTML présent en base (ok)
 
 ---
 
@@ -177,7 +177,7 @@ Créer `config.php`
 
 ## 🧪 TEST CRUD COMPLET
 
-✔️ Create
+✔️ Create (ok)
 ✔️ Read
 ✔️ Update
 ✔️ Delete
