@@ -1,19 +1,28 @@
 <?php
 include('../includes/config.php');
 
-$titre   = $_POST['titre'];
-$contenu = $_POST['contenu'];
-$slug    = $_POST['slug'];
+$titre            = $_POST['titre'];
+$slug             = $_POST['slug'];
+$contenu          = $_POST['contenu'];
+$meta_description = $_POST['meta_description'] ?? null;
 
-$sql  = "INSERT INTO article (titre, slug, contenu) VALUES (:titre, :slug, :contenu)";
+
+// Insert en base
+$sql  = "INSERT INTO article 
+            (titre, slug, contenu, meta_description) 
+         VALUES 
+            (:titre, :slug, :contenu, :meta_description)";
+
 $stmt = $pdo->prepare($sql);
 
 if ($stmt->execute([
-    ':titre'   => $titre,
-    ':slug'    => $slug,
-    ':contenu' => $contenu
+    ':titre'            => $titre,
+    ':slug'             => $slug,
+    ':contenu'          => $contenu,
+    ':meta_description' => $meta_description,
 ])) {
-    echo "Article enregistré avec succès !";
+    echo "Article enregistre avec succes !";
+    exit;
 } else {
     echo "Erreur lors de l'enregistrement.";
 }

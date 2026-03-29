@@ -191,29 +191,29 @@ Créer `config.php` (ok)
 ## 🔹 5.1 Config TinyMCE
 
 ```js
-images_upload_url: 'upload.php'
+images_upload_url: 'upload.php' 
 ```
 
 ---
 
 ## 🔹 5.2 Créer `upload.php`
 
-* upload fichier
+* upload fichier (ok)
 * retourner JSON
 
 ---
 
 ## 🔹 5.3 Dossier `/uploads`
 
-* permissions OK
+* permissions OK (ok)
 
 ---
 
 ## 🧪 TEST
 
-✔️ upload image fonctionne
-✔️ image insérée dans contenu
-✔️ plusieurs images OK
+✔️ upload image fonctionne (ok)
+✔️ image insérée dans contenu (ok)
+✔️ plusieurs images OK (ok)
 
 ---
 
@@ -223,7 +223,7 @@ images_upload_url: 'upload.php'
 
 ## 🔹 6.1 Page index
 
-* afficher liste articles
+* afficher liste articles (ok)
 
 ---
 

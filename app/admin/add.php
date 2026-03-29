@@ -20,8 +20,16 @@
 <body>
 <h2>Ajouter un article</h2>
 <form method="POST" action="save.php">
+  <label>Titre</label><br>
   <input type="text" name="titre" placeholder="Titre" required><br><br>
-  <input type="text" name="slug" placeholder="Slug"><br><br>
+  
+  <label>Slug</label><br>
+  <input type="text" name="slug" placeholder="ex: guerre-iran-2024"><br><br>
+  
+  <label>Meta description (160 car. max)</label><br>
+  <textarea name="meta_description" maxlength="160" rows="3" placeholder="Courte description pour les moteurs de recherche..."></textarea><br><br>
+
+  <label>Contenu</label><br>
   <textarea id="contenu" name="contenu"></textarea><br>
   <button type="submit">Enregistrer</button>
 </form>

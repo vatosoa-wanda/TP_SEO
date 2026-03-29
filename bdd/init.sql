@@ -14,12 +14,12 @@ CREATE TABLE IF NOT EXISTS article (
     slug VARCHAR(255) NOT NULL UNIQUE,
     contenu LONGTEXT NOT NULL,
     meta_description VARCHAR(160) DEFAULT NULL,
-    image_principale VARCHAR(255) DEFAULT NULL,
     date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modification DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_slug (slug),
     INDEX idx_date (date_creation)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 -- ============================================
 -- Table des administrateurs (BackOffice)
