@@ -2,7 +2,7 @@
 require_once 'includes/config.php';
 
 // Recuperer tous les articles
-$stmt = $pdo->query("SELECT id, titre, slug, meta_description, date_creation FROM article ORDER BY date_creation DESC");
+$stmt = $pdo->query("SELECT id, titre, slug, contenu, meta_description, date_creation FROM article ORDER BY date_creation DESC");
 $articles = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -96,11 +96,14 @@ $articles = $stmt->fetchAll();
                 <a href="/article/<?= $article['id'] ?>/<?= $article['slug'] ?>">
                     <?= htmlspecialchars($article['titre']) ?>
                 </a>
-            </h2>
+            </h2> 
             <p class="meta">
                 Publie le <?= date('d/m/Y', strtotime($article['date_creation'])) ?>
             </p>
             <p><?= htmlspecialchars($article['meta_description']) ?></p>
+            <div class="contenu">
+                <?= $article['contenu'] ?>
+            </div>
         </article>
         <?php endforeach; ?>
     </main>
