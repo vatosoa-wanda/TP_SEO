@@ -32,9 +32,15 @@ $articles = $stmt->fetchAll();
     header {
       background: #1a1a1a;
       color: white;
-      text-align: center;
       padding: 30px 20px;
       border-bottom: 3px solid #c00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .title {
+      text-align: center;
+      flex: 1;
     }
     header h1 {
       font-size: 2.8rem;
@@ -45,6 +51,30 @@ $articles = $stmt->fetchAll();
       font-size: 0.9rem;
       color: #aaa;
       margin-top: 5px;
+    }
+    header .user-info {
+      font-size: 0.9rem;
+      color: #aaa;
+      white-space: nowrap;
+      margin-left: 20px;
+    }
+    header .user-info strong {
+      color: white;
+    }
+    header .btn-logout {
+      background: #c00;
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-family: Arial, sans-serif;
+      margin-left: 15px;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    header .btn-logout:hover {
+      background: #a00;
     }
 
     /* NAV */
@@ -163,8 +193,16 @@ $articles = $stmt->fetchAll();
 
   <!-- HEADER -->
   <header>
-    <h1>Le Monde</h1>
-    <p>Actualités &amp; Analyses — Conflit en Iran</p>
+    <div class="title">
+      <h1>Le Monde</h1>
+      <p>Actualités &amp; Analyses — Conflit en Iran</p>
+    </div>
+    <?php if (isLoggedIn()): ?>
+    <div class="user-info">
+      Connecté : <strong><?= htmlspecialchars($_SESSION['admin_username']) ?></strong>
+      <a href="admin/logout.php" class="btn-logout">Déconnexion</a>
+    </div>
+    <?php endif; ?>
   </header>
 
   <!-- NAV -->
@@ -173,6 +211,9 @@ $articles = $stmt->fetchAll();
     <a href="#">International</a>
     <a href="#">Politique</a>
     <a href="#">Économie</a>
+    <?php if (isLoggedIn()): ?>
+    <a href="/admin/list.php" style="color: #c00; font-weight: bold;">⚙️ Administration</a>
+    <?php endif; ?>
   </nav>
 
   <!-- MAIN -->

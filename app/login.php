@@ -1,11 +1,11 @@
 <?php
-require_once '../includes/config.php';
+require_once 'includes/config.php';
 
 $error = '';
 
-// Si l'utilisateur est déjà connecté, rediriger vers la gestion des articles
+// Si l'utilisateur est déjà connecté, rediriger vers l'accueil
 if (isLoggedIn()) {
-    header('Location: list.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['admin_id'] = $admin['id'];
             $_SESSION['admin_username'] = $admin['username'];
             
-            // Rediriger vers la gestion des articles
-            header('Location: list.php');
+            // Rediriger vers la page d'accueil
+            header('Location: index.php');
             exit;
         } else {
             $error = 'Identifiants incorrects';

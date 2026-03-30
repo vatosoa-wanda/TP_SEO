@@ -1,4 +1,7 @@
 <?php
+include('../includes/config.php');
+requireLogin();
+
 $types_autorises = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 $max_taille      = 5 * 1024 * 1024;
 $dossier         = '../uploads/';

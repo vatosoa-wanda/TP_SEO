@@ -1,5 +1,6 @@
 <?php
 include('../includes/config.php');
+requireLogin();
 
 $titre            = $_POST['titre'];
 $slug             = $_POST['slug'];

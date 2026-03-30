@@ -1,3 +1,7 @@
+<?php
+include('../includes/config.php');
+requireLogin();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

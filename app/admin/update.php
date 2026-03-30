@@ -1,5 +1,6 @@
 <?php
 include('../includes/config.php');
+requireLogin();
 
 $id               = $_POST['id'];
 $titre            = $_POST['titre'];
