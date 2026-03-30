@@ -23,6 +23,27 @@ if (!$article) {
 $base_url    = 'http://localhost:8080';
 $url_article = $base_url . '/article/' . $article['id'] . '/' . htmlspecialchars($article['slug']);
 
+$contenu = $article['contenu'];
+
+// Ajouter loading="lazy" sur toutes les images du contenu
+$contenu = preg_replace(
+    '/<img(?![^>]*loading=)/',
+    '<img loading="lazy"',
+    $contenu
+);
+
+$premiere = false;
+$contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premiere) {
+    if (!$premiere) {
+        $premiere = true;
+        $img = str_replace('loading="lazy"', '', $match[0]);
+        $img = str_replace('<img ', '<img fetchpriority="high" ', $img);
+        return $img;
+    }
+    return $match[0];
+}, $contenu);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
