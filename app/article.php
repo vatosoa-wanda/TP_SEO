@@ -18,6 +18,11 @@ if (!$article) {
     header('Location: /');
     exit;
 }
+
+// URL canonique absolue
+$base_url    = 'http://localhost:8080';
+$url_article = $base_url . '/article/' . $article['id'] . '/' . htmlspecialchars($article['slug']);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,7 +37,12 @@ if (!$article) {
   <meta property="og:type"        content="article">
   <meta property="og:url"         content="/article/<?= $article['id'] ?>/<?= htmlspecialchars($article['slug']) ?>">
 
+  <meta name="robots"      content="index, follow">
+
   <title><?= htmlspecialchars($article['titre']) ?> | Le Monde</title>
+
+  <!-- URL canonique -->
+  <link rel="canonical" href="<?= $url_article ?>">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,10 +66,11 @@ if (!$article) {
       color: white;
       text-decoration: none;
     }
-    header h1 {
+    header .site-name {
       font-size: 2.8rem;
       font-weight: normal;
       letter-spacing: 2px;
+      display: block;
     }
     header p {
       font-size: 0.9rem;
@@ -106,12 +117,27 @@ if (!$article) {
       padding: 0 20px;
     }
 
-    /* ARTICLE */
     .article-header {
       background: white;
       padding: 35px 40px 25px;
       border-left: 4px solid #c00;
       margin-bottom: 5px;
+    }
+
+    /* ARTICLE */
+    .article-header h1 {
+      font-size: 2rem;
+      font-weight: normal;
+      line-height: 1.3;
+      margin-bottom: 15px;
+    }
+
+    .article-header .meta {
+      font-size: 0.82rem;
+      color: #999;
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .article-header .categorie {
@@ -128,14 +154,6 @@ if (!$article) {
       font-weight: normal;
       line-height: 1.3;
       margin-bottom: 15px;
-    }
-
-    .article-header .meta {
-      font-size: 0.82rem;
-      color: #999;
-      font-family: Arial, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .article-header .meta-description {
@@ -247,9 +265,10 @@ if (!$article) {
 
     /* RESPONSIVE */
     @media (max-width: 600px) {
-      header h1 { font-size: 1.8rem; }
+      header .site-name { font-size: 1.8rem; }
       .article-header, .article-contenu { padding: 20px; }
-      .article-header h2 { font-size: 1.4rem; }
+      .article-header h1 { font-size: 1.4rem; }
+      nav a { margin: 0 10px; font-size: 0.75rem; }
     }
   </style>
 </head>
@@ -257,7 +276,9 @@ if (!$article) {
 
   <!-- HEADER -->
   <header>
-    <a href="/"><h1>Le Monde</h1></a>
+    <a href="/">
+      <span class="site-name">Le Monde</span>
+    </a>
     <p>Actualités &amp; Analyses — Conflit en Iran</p>
   </header>
 
