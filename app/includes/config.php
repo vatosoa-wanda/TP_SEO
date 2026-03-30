@@ -4,7 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$host     = 'localhost';
+// Détecter l'environnement (Docker ou local)
+$host     = getenv('DB_HOST') ?: (file_exists('/.dockerenv') ? 'db' : 'localhost');
 $dbname   = 'guerre_iran';
 $user     = 'root';
 $password = 'root';

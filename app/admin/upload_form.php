@@ -6,27 +6,47 @@ requireLogin();
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Upload Images</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
-    h2 { margin-bottom: 20px; }
-    input[type="file"] { display: block; margin-bottom: 15px; }
-    button { padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; }
-    button:hover { background: #555; }
-    .message { margin-top: 20px; padding: 10px; background: #e8f5e9; border-left: 4px solid green; }
-    .erreur  { margin-top: 20px; padding: 10px; background: #fdecea; border-left: 4px solid red; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionnaire d'images</title>
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 
-<h2>Upload d'images</h2>
+<div class="admin-header">
+  <h1>📰 Conflit en Iran - Administration</h1>
+  <div>
+    <span class="user-info">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_username']) ?></strong></span>
+    <a href="logout.php">Déconnexion</a>
+  </div>
+</div>
 
-<form method="POST" action="upload.php" enctype="multipart/form-data">
-  <label>Choisir une ou plusieurs images :</label><br><br>
-  <input type="file" name="fichiers[]" multiple accept="image/*">
-  <br>
-  <button type="submit">Envoyer</button>
-</form>
+<div class="admin-container">
+  <div class="breadcrumb">
+    <a href="list.php">← Retour à la liste</a>
+  </div>
+
+  <div class="page-title">Upload d'images</div>
+  <p class="page-subtitle">Téléchargez des images pour vos articles</p>
+
+  <div class="card">
+    <form method="POST" action="upload.php" enctype="multipart/form-data" class="card-body">
+      <div class="form-group">
+        <label>Choisir une ou plusieurs images</label>
+        <input type="file" name="fichiers[]" multiple accept="image/*" required>
+        <small>Formats supportés : JPG, PNG, GIF, WebP (Max 5 MB par image)</small>
+      </div>
+
+      <div class="card-footer">
+        <a href="list.php" class="btn btn-secondary">Annuler</a>
+        <button type="submit" class="btn btn-success">⬆️ Envoyer les images</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="admin-footer">
+  <p>&copy; 2026 Conflit en Iran - Back-office d'administration</p>
+</div>
 
 </body>
 </html>
