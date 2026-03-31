@@ -1,5 +1,6 @@
 <?php
 include('../includes/config.php');
+requireLogin();
 
 $id = $_GET['id'] ?? null;
 if (!$id) { header('Location: list.php'); exit; }
@@ -14,7 +15,9 @@ if (!$article) { header('Location: list.php'); exit; }
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modifier l'article</title>
+  <link rel="stylesheet" href="css/admin.css">
   <script src="../tinymce/tinymce.min.js"></script>
   <script>
     tinymce.init({
@@ -29,35 +32,62 @@ if (!$article) { header('Location: list.php'); exit; }
       convert_urls: false,
     });
   </script>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
-    input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
-    button { padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; margin-top: 15px; }
-    a { color: #333; }
-  </style>
 </head>
 <body>
 
-<h2>Modifier l'article</h2>
-<a href="list.php">← Retour à la liste</a><br><br>
+<div class="admin-header">
+  <h1>📰 Conflit en Iran - Administration</h1>
+  <div>
+    <span class="user-info">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_username']) ?></strong></span>
+    <a href="logout.php">Déconnexion</a>
+  </div>
+</div>
 
-<form method="POST" action="update.php">
-  <input type="hidden" name="id" value="<?= $article['id'] ?>">
+<div class="admin-container">
+  <div class="breadcrumb">
+    <a href="list.php">← Retour à la liste</a>
+  </div>
 
-  <label>Titre</label>
-  <input type="text" name="titre" value="<?= htmlspecialchars($article['titre']) ?>" required><br><br>
+  <div class="page-title">Modifier l'article</div>
+  <p class="page-subtitle"><?= htmlspecialchars($article['titre']) ?></p>
 
-  <label>Slug</label>
-  <input type="text" name="slug" value="<?= htmlspecialchars($article['slug']) ?>"><br><br>
+  <div class="card">
+    <form method="POST" action="update.php" class="card-body">
+      <input type="hidden" name="id" value="<?= $article['id'] ?>">
 
-  <label>Meta description (160 car. max)</label>
-  <textarea name="meta_description" maxlength="160" rows="3"><?= htmlspecialchars($article['meta_description'] ?? '') ?></textarea><br><br>
+      <div class="form-group">
+        <label>Titre de l'article</label>
+        <input type="text" name="titre" value="<?= htmlspecialchars($article['titre']) ?>" required>
+      </div>
 
-  <label>Contenu</label>
-  <textarea id="contenu" name="contenu"><?= $article['contenu'] ?></textarea><br>
+      <div class="form-group">
+        <label>Slug (URL)</label>
+        <input type="text" name="slug" value="<?= htmlspecialchars($article['slug']) ?>" required>
+        <small>Pas d'espaces, caractères minuscules</small>
+      </div>
 
-  <button type="submit">Enregistrer les modifications</button>
-</form>
+      <div class="form-group">
+        <label>Meta description</label>
+        <textarea name="meta_description" maxlength="160" rows="2"><?= htmlspecialchars($article['meta_description'] ?? '') ?></textarea>
+        <small>Maximum 160 caractères</small>
+      </div>
+
+      <div class="form-group">
+        <label>Contenu de l'article</label>
+        <textarea id="contenu" name="contenu"><?= $article['contenu'] ?></textarea>
+      </div>
+
+      <div class="card-footer">
+        <a href="list.php" class="btn btn-secondary">Annuler</a>
+        <button type="submit" class="btn btn-success">💾 Enregistrer les modifications</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="admin-footer">
+  <p>&copy; 2026 Conflit en Iran - Back-office d'administration</p>
+</div>
 
 </body>
 </html>

@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS admin (
 -- Insertion admin par defaut
 -- Login: admin / Password: admin123
 -- ============================================
-INSERT INTO admin (username, password) VALUES
+INSERT IGNORE INTO admin (username, password) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 -- Note: Hash bcrypt de 'admin123'
 
 -- ============================================
 -- Articles de demonstration
 -- ============================================
-INSERT INTO article (titre, slug, contenu, meta_description, image_principale) VALUES
+INSERT IGNORE INTO article (titre, slug, contenu, meta_description, image_principale) VALUES
 (
     'Contexte historique du conflit en Iran',
     'contexte-historique-conflit-iran',
