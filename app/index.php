@@ -85,6 +85,11 @@ $articles = $stmt->fetchAll();
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
     nav a {
       color: #ddd;
@@ -96,6 +101,45 @@ $articles = $stmt->fetchAll();
       font-family: Arial, sans-serif;
     }
     nav a:hover { color: white; border-bottom: 2px solid #c00; padding-bottom: 2px; }
+    
+    nav .search-bar {
+      display: flex;
+      gap: 8px;
+      margin: 0 10px;
+    }
+    nav .search-bar input {
+      padding: 6px 12px;
+      border: 1px solid #444;
+      background: #333;
+      color: white;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-family: Arial, sans-serif;
+      min-width: 150px;
+    }
+    nav .search-bar input::placeholder {
+      color: #999;
+    }
+    nav .search-bar input:focus {
+      outline: none;
+      border-color: #c00;
+      background: #3a3a3a;
+    }
+    nav .search-bar button {
+      padding: 6px 15px;
+      background: #c00;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+    }
+    nav .search-bar button:hover {
+      background: #a00;
+    }
 
     /* MAIN */
     main {
@@ -241,9 +285,12 @@ $articles = $stmt->fetchAll();
     <a href="#">International</a>
     <a href="#">Politique</a>
     <a href="#">Économie</a>
-    <?php if (isLoggedIn()): ?>
-    <!-- <a href="/admin/list.php" style="color: #c00; font-weight: bold;">⚙️ Administration</a> -->
-    <?php endif; ?>
+    <div class="search-bar">
+      <form method="GET" action="/search.php" style="display: flex; gap: 8px;">
+        <input type="text" name="q" placeholder="Rechercher..." required>
+        <button type="submit">🔍</button>
+      </form>
+    </div>
   </nav>
 
   <!-- MAIN -->
