@@ -1,18 +1,32 @@
 <?php
 require_once 'includes/config.php';
 
-// Récupérer le slug depuis l'URL (ou la partie non-PHP de l'URL)
+// Récupérer l'URL et extraire l'ID du fichier
+// Format: /articles/titre-slugifie-ID.html
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$slug_from_url = trim($request_uri, '/');
 
-if (empty($slug_from_url)) {
+// Rétirer /articles/ et .html
+$filename = basename($request_uri, '.html'); // titre-slugifie-ID
+
+if (empty($filename)) {
     header('Location: /');
     exit;
 }
 
-// Chercher l'article par le slug (qui est dérivé du titre)
-$stmt = $pdo->prepare("SELECT * FROM article WHERE slug = :slug LIMIT 1");
-$stmt->execute([':slug' => $slug_from_url]);
+// Extraire l'ID à la fin (après le dernier tiret)
+$parts = explode('-', $filename);
+$id = array_pop($parts); // Récupérer le dernier élément (l'ID)
+
+// Vérifier que c'est un nombre
+if (!is_numeric($id)) {
+    http_response_code(404);
+    header('Location: /');
+    exit;
+}
+
+// Chercher l'article par l'ID
+$stmt = $pdo->prepare("SELECT * FROM article WHERE id = :id LIMIT 1");
+$stmt->execute([':id' => $id]);
 $article = $stmt->fetch();
 
 if (!$article) {
@@ -21,9 +35,9 @@ if (!$article) {
     exit;
 }
 
-// URL canonique absolue - utilise le titre transformé
+// URL canonique absolue
 $base_url    = 'http://localhost:8080';
-$url_article = $base_url . '/' . slugify($article['titre']);
+$url_article = $base_url . '/articles/' . slugify($article['titre']) . '-' . $article['id'] . '.html';
 
 $contenu = $article['contenu'];
 

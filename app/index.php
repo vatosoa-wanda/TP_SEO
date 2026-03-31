@@ -228,7 +228,7 @@ $articles = $stmt->fetchAll();
         <article class="article-card">
 
           <h2>
-            <a href="/article/<?= $article['id'] ?>/<?= htmlspecialchars($article['slug']) ?>">
+            <a href="/articles/<?= slugify($article['titre']) ?>-<?= $article['id'] ?>.html">
               <?= htmlspecialchars($article['titre']) ?>
             </a>
           </h2>
@@ -244,7 +244,7 @@ $articles = $stmt->fetchAll();
           <?php endif; ?>
 
           <a class="lire-plus"
-             href="/<?= slugify($article['titre']) ?>">
+             href="/articles/<?= slugify($article['titre']) ?>-<?= $article['id'] ?>.html">
             Lire la suite →
           </a>
 
