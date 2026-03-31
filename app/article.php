@@ -1,18 +1,32 @@
 <?php
 require_once 'includes/config.php';
 
-// Récupérer le slug depuis l'URL (ou la partie non-PHP de l'URL)
+// Récupérer l'URL et extraire l'ID du fichier
+// Format: /articles/titre-slugifie-ID.html
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$slug_from_url = trim($request_uri, '/');
 
-if (empty($slug_from_url)) {
+// Rétirer /articles/ et .html
+$filename = basename($request_uri, '.html'); // titre-slugifie-ID
+
+if (empty($filename)) {
     header('Location: /');
     exit;
 }
 
-// Chercher l'article par le slug (qui est dérivé du titre)
-$stmt = $pdo->prepare("SELECT * FROM article WHERE slug = :slug LIMIT 1");
-$stmt->execute([':slug' => $slug_from_url]);
+// Extraire l'ID à la fin (après le dernier tiret)
+$parts = explode('-', $filename);
+$id = array_pop($parts); // Récupérer le dernier élément (l'ID)
+
+// Vérifier que c'est un nombre
+if (!is_numeric($id)) {
+    http_response_code(404);
+    header('Location: /');
+    exit;
+}
+
+// Récupérer l'article
+$stmt = $pdo->prepare("SELECT * FROM article WHERE id = :id LIMIT 1");
+$stmt->execute([':id' => $id]);
 $article = $stmt->fetch();
 
 if (!$article) {
@@ -21,9 +35,14 @@ if (!$article) {
     exit;
 }
 
-// URL canonique absolue - utilise le titre transformé
+// Récupérer TOUTES les photos de l'article
+$stmt_photos = $pdo->prepare("SELECT photos FROM photos WHERE id_article = :id_article ORDER BY date_ajout ASC");
+$stmt_photos->execute([':id_article' => $article['id']]);
+$photos = $stmt_photos->fetchAll();
+
+// URL canonique absolue
 $base_url    = 'http://localhost:8080';
-$url_article = $base_url . '/' . slugify($article['titre']);
+$url_article = $base_url . '/articles/' . slugify($article['titre']) . '-' . $article['id'] . '.html';
 
 $contenu = $article['contenu'];
 
@@ -338,6 +357,21 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
         <p class="meta-description"><?= htmlspecialchars($article['meta_description']) ?></p>
       <?php endif; ?>
     </div>
+
+    <!-- PHOTOS DE L'ARTICLE -->
+    <?php if (!empty($photos)): ?>
+      <div class="article-contenu" style="padding: 35px 40px 20px; background: white; margin-bottom: 0;">
+        <h3 style="font-size: 1.3rem; margin-top: 0; margin-bottom: 20px;">Photos de l'article</h3>
+        <div class="photos-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+          <?php foreach ($photos as $photo): ?>
+            <img src="/uploads/<?= htmlspecialchars($photo['photos']) ?>" 
+                 alt="Photo article" 
+                 style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; transition: transform 0.2s;"
+                 loading="lazy">
+          <?php endforeach; ?>
+        </div>
+      </div>
+    <?php endif; ?>
 
     <!-- CONTENU TINYMCE -->
     <div class="article-contenu">

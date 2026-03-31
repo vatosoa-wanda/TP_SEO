@@ -55,7 +55,7 @@
             <td><?= date('d/m/Y', strtotime($a['date_creation'])) ?></td>
             <td class="actions">
               <a href="edit.php?id=<?= $a['id'] ?>" class="btn btn-warning">✏️ Modifier</a>
-              <a href="upload_form.php" class="btn btn-primary">🖼️ Images</a>
+              <a href="photos_manage.php?id=<?= $a['id'] ?>" class="btn btn-primary">🖼️ Photos</a>
               <form method="POST" action="delete.php" style="display:inline" onsubmit="return confirm('Supprimer définitivement cet article ?')">
                 <input type="hidden" name="id" value="<?= $a['id'] ?>">
                 <button type="submit" class="btn btn-danger">🗑️ Supprimer</button>

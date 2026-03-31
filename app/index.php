@@ -123,9 +123,29 @@ $articles = $stmt->fetchAll();
       margin-bottom: 15px;
       border-left: 4px solid transparent;
       transition: border-color 0.2s;
+      display: flex;
+      gap: 25px;
+      align-items: flex-start;
     }
     .article-card:hover {
       border-left-color: #c00;
+    }
+    
+    .article-card-content {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .article-card-photo {
+      flex: 0 0 280px;
+      min-height: 200px;
+    }
+    
+    .article-card-photo img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
     }
 
     .article-card h2 {
@@ -167,6 +187,16 @@ $articles = $stmt->fetchAll();
       letter-spacing: 0.5px;
     }
     .lire-plus:hover { text-decoration: underline; }
+    
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .article-card {
+        flex-direction: column;
+      }
+      .article-card-photo {
+        flex: 0 0 auto;
+      }
+    }
 
     /* AUCUN ARTICLE */
     .vide {
@@ -197,12 +227,12 @@ $articles = $stmt->fetchAll();
       <h1>Le Monde</h1>
       <p>Actualités &amp; Analyses — Conflit en Iran</p>
     </div>
-    <?php if (isLoggedIn()): ?>
+    <!-- <?php if (isLoggedIn()): ?>
     <div class="user-info">
       Connecté : <strong><?= htmlspecialchars($_SESSION['admin_username']) ?></strong>
       <a href="admin/logout.php" class="btn-logout">Déconnexion</a>
     </div>
-    <?php endif; ?>
+    <?php endif; ?> -->
   </header>
 
   <!-- NAV -->
@@ -212,7 +242,7 @@ $articles = $stmt->fetchAll();
     <a href="#">Politique</a>
     <a href="#">Économie</a>
     <?php if (isLoggedIn()): ?>
-    <a href="/admin/list.php" style="color: #c00; font-weight: bold;">⚙️ Administration</a>
+    <!-- <a href="/admin/list.php" style="color: #c00; font-weight: bold;">⚙️ Administration</a> -->
     <?php endif; ?>
   </nav>
 
@@ -226,27 +256,44 @@ $articles = $stmt->fetchAll();
     <?php else: ?>
       <?php foreach ($articles as $article): ?>
         <article class="article-card">
+          
+          <div class="article-card-content">
+            <h2>
+              <a href="/articles/<?= slugify($article['titre']) ?>-<?= $article['id'] ?>.html">
+                <?= htmlspecialchars($article['titre']) ?>
+              </a>
+            </h2>
 
-          <h2>
-            <a href="/article/<?= $article['id'] ?>/<?= htmlspecialchars($article['slug']) ?>">
-              <?= htmlspecialchars($article['titre']) ?>
-            </a>
-          </h2>
-
-          <p class="meta">
-            Publié le <?= date('d/m/Y \à H\hi', strtotime($article['date_creation'])) ?>
-          </p>
-
-          <?php if (!empty($article['meta_description'])): ?>
-            <p class="description">
-              <?= htmlspecialchars($article['meta_description']) ?>
+            <p class="meta">
+              Publié le <?= date('d/m/Y \à H\hi', strtotime($article['date_creation'])) ?>
             </p>
-          <?php endif; ?>
+            
+            <?php if (!empty($article['meta_description'])): ?>
+              <p class="description">
+                <?= htmlspecialchars($article['meta_description']) ?>
+              </p>
+            <?php endif; ?>
 
-          <a class="lire-plus"
-             href="/<?= slugify($article['titre']) ?>">
-            Lire la suite →
-          </a>
+            <a class="lire-plus"
+               href="/articles/<?= slugify($article['titre']) ?>-<?= $article['id'] ?>.html">
+              Lire la suite →
+            </a>
+          </div>
+          
+          <?php 
+          // Récupérer la PREMIÈRE photo (photo principale)
+          $stmt_photo = $pdo->prepare("SELECT photos FROM photos WHERE id_article = :id_article ORDER BY date_ajout ASC LIMIT 1");
+          $stmt_photo->execute([':id_article' => $article['id']]);
+          $photo = $stmt_photo->fetch();
+          ?>
+          
+          <?php if ($photo): ?>
+            <div class="article-card-photo">
+              <img src="/uploads/<?= htmlspecialchars($photo['photos']) ?>" 
+                   alt="<?= htmlspecialchars($article['titre']) ?>" 
+                   loading="lazy">
+            </div>
+          <?php endif; ?>
 
         </article>
       <?php endforeach; ?>
