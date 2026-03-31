@@ -1,16 +1,18 @@
 <?php
 require_once 'includes/config.php';
 
-$id   = $_GET['id']   ?? null;
-$slug = $_GET['slug'] ?? null;
+// Récupérer le slug depuis l'URL (ou la partie non-PHP de l'URL)
+$request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$slug_from_url = trim($request_uri, '/');
 
-if (!$id || !$slug) {
+if (empty($slug_from_url)) {
     header('Location: /');
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM article WHERE id = :id AND slug = :slug LIMIT 1");
-$stmt->execute([':id' => $id, ':slug' => $slug]);
+// Chercher l'article par le slug (qui est dérivé du titre)
+$stmt = $pdo->prepare("SELECT * FROM article WHERE slug = :slug LIMIT 1");
+$stmt->execute([':slug' => $slug_from_url]);
 $article = $stmt->fetch();
 
 if (!$article) {
@@ -19,9 +21,9 @@ if (!$article) {
     exit;
 }
 
-// URL canonique absolue
+// URL canonique absolue - utilise le titre transformé
 $base_url    = 'http://localhost:8080';
-$url_article = $base_url . '/article/' . $article['id'] . '/' . htmlspecialchars($article['slug']);
+$url_article = $base_url . '/' . slugify($article['titre']);
 
 $contenu = $article['contenu'];
 

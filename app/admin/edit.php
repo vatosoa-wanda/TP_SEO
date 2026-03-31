@@ -61,9 +61,9 @@ if (!$article) { header('Location: list.php'); exit; }
       </div>
 
       <div class="form-group">
-        <label>Slug (URL)</label>
-        <input type="text" name="slug" value="<?= htmlspecialchars($article['slug']) ?>" required>
-        <small>Pas d'espaces, caractères minuscules</small>
+        <label>URL générée automatiquement</label>
+        <input type="text" id="slug-preview" name="slug-preview" disabled="disabled" placeholder="L'URL sera générée à partir du titre..." value="<?= htmlspecialchars($article['slug']) ?>">
+        <small>L'URL s'auto-génère à partir du titre (espaces → tirets)</small>
       </div>
 
       <div class="form-group">

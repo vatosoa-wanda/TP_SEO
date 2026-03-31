@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS admin (
 -- Login: admin / Password: admin123
 -- ============================================
 INSERT IGNORE INTO admin (username, password) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
--- Note: Hash bcrypt de 'admin123'
+('admin', 'admin123');
+-- Note: Mot de passe en clair
 
 -- ============================================
 -- Articles de demonstration
