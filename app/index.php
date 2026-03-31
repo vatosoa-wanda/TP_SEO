@@ -49,12 +49,12 @@ $articles = $stmt->fetchAll();
     }
     header p {
       font-size: 0.9rem;
-      color: #aaa;
+      color: #ddd;
       margin-top: 5px;
     }
     header .user-info {
       font-size: 0.9rem;
-      color: #aaa;
+      color: #ddd;
       white-space: nowrap;
       margin-left: 20px;
     }
@@ -92,15 +92,15 @@ $articles = $stmt->fetchAll();
       flex-wrap: wrap;
     }
     nav a {
-      color: #ddd;
-      text-decoration: none;
+      color: #fff;
+      text-decoration: underline;
       margin: 0 20px;
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-family: Arial, sans-serif;
     }
-    nav a:hover { color: white; border-bottom: 2px solid #c00; padding-bottom: 2px; }
+    nav a:hover { color: #c00; text-decoration: underline; text-decoration-thickness: 2px; }
     
     nav .search-bar {
       display: flex;
@@ -118,7 +118,7 @@ $articles = $stmt->fetchAll();
       min-width: 150px;
     }
     nav .search-bar input::placeholder {
-      color: #999;
+      color: #666;
     }
     nav .search-bar input:focus {
       outline: none;
@@ -199,15 +199,18 @@ $articles = $stmt->fetchAll();
     }
     .article-card h2 a {
       color: #1a1a1a;
-      text-decoration: none;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.2s;
     }
     .article-card h2 a:hover {
       color: #c00;
+      text-decoration-color: #c00;
     }
 
     .article-card .meta {
       font-size: 0.8rem;
-      color: #999;
+      color: #555;
       font-family: Arial, sans-serif;
       margin-bottom: 10px;
       text-transform: uppercase;
@@ -245,7 +248,7 @@ $articles = $stmt->fetchAll();
     /* AUCUN ARTICLE */
     .vide {
       text-align: center;
-      color: #999;
+      color: #555;
       padding: 60px 0;
       font-style: italic;
     }
@@ -253,7 +256,7 @@ $articles = $stmt->fetchAll();
     /* FOOTER */
     footer {
       background: #1a1a1a;
-      color: #666;
+      color: #aaa;
       text-align: center;
       padding: 25px;
       margin-top: 60px;

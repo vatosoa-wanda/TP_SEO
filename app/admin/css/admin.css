@@ -37,7 +37,7 @@ body {
 
 .admin-header .user-info {
     font-size: 0.85rem;
-    color: #aaa;
+    color: #ddd;
 }
 
 .admin-header .user-info strong {
@@ -78,7 +78,7 @@ body {
 
 .page-subtitle {
     font-size: 0.85rem;
-    color: #999;
+    color: #555;
     margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -92,7 +92,7 @@ body {
 
 .breadcrumb a {
     color: #c00;
-    text-decoration: none;
+    text-decoration: underline;
     background: none;
     padding: 0;
     margin-left: 0;
@@ -101,6 +101,7 @@ body {
 .breadcrumb a:hover {
     text-decoration: underline;
     background: none;
+    text-decoration-thickness: 2px;
 }
 
 /* ===== BUTTONS ===== */
@@ -230,7 +231,7 @@ body {
 .form-group small {
     display: block;
     margin-top: 4px;
-    color: #999;
+    color: #555;
     font-size: 0.85rem;
     font-family: Arial, sans-serif;
 }
@@ -330,27 +331,27 @@ body {
 
 .alert-success {
     background: #d5f4e6;
-    color: #27ae60;
-    border-color: #27ae60;
+    color: #155644;
+    border-color: #155644;
 }
 
 .alert-error,
 .alert-danger {
     background: #fadbd8;
-    color: #c00;
-    border-color: #c00;
+    color: #8b0000;
+    border-color: #8b0000;
 }
 
 .alert-warning {
     background: #fef5e7;
-    color: #f39c12;
-    border-color: #f39c12;
+    color: #b8860b;
+    border-color: #b8860b;
 }
 
 .alert-info {
     background: #d6eaf8;
-    color: #333;
-    border-color: #333;
+    color: #003d7a;
+    border-color: #003d7a;
 }
 
 .alert strong {
@@ -375,7 +376,7 @@ body {
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: #999;
+    color: #555;
 }
 
 .empty-state p {
@@ -390,7 +391,7 @@ body {
     padding: 20px;
     margin-top: 40px;
     text-align: center;
-    color: #666;
+    color: #aaa;
     font-size: 0.85rem;
     font-family: Arial, sans-serif;
 }

@@ -1,0 +1,17 @@
+# robots.txt
+User-agent: *
+Allow: /
+
+# Désactiver l'indexation des répertoires sensibles
+Disallow: /app/admin/
+Disallow: /app/includes/
+Disallow: /bdd/
+Disallow: /nginx/
+Disallow: /php/
+
+# Répertoires autorisés
+Allow: /app/
+Allow: /app/images/
+
+# Sitemap (si vous en avez une)
+# Sitemap: https://yoursite.com/sitemap.xml

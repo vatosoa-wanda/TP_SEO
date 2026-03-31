@@ -72,7 +72,7 @@ $photos = $stmt_photos->fetchAll();
     }
     .photo-info {
       font-size: 0.8rem;
-      color: #666;
+      color: #555;
       padding: 8px;
       text-align: center;
     }
@@ -153,7 +153,7 @@ $photos = $stmt_photos->fetchAll();
       <h3>Photos actuelles (<?= count($photos) ?>)</h3>
       
       <?php if (count($photos) > 0): ?>
-        <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">
+        <p style="color: #555; font-size: 0.9rem; margin-bottom: 15px;">
           La <strong>première photo</strong> est la photo principale affichée à l'accueil.
         </p>
         
@@ -173,7 +173,7 @@ $photos = $stmt_photos->fetchAll();
           <?php endforeach; ?>
         </div>
       <?php else: ?>
-        <p style="color: #999; font-style: italic;">Aucune photo pour cet article. Ajoutez-en une ci-dessus.</p>
+        <p style="color: #555; font-style: italic;">Aucune photo pour cet article. Ajoutez-en une ci-dessus.</p>
       <?php endif; ?>
 
     </div>
