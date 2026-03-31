@@ -3,10 +3,11 @@ include('../includes/config.php');
 requireLogin();
 
 $titre            = $_POST['titre'];
-$slug             = $_POST['slug'];
 $contenu          = $_POST['contenu'];
 $meta_description = $_POST['meta_description'] ?? null;
 
+// Générer automatiquement le slug à partir du titre
+$slug = slugify($titre);
 
 // Insert en base
 $sql  = "INSERT INTO article 

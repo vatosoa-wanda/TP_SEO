@@ -244,7 +244,7 @@ $articles = $stmt->fetchAll();
           <?php endif; ?>
 
           <a class="lire-plus"
-             href="/article/<?= $article['id'] ?>/<?= htmlspecialchars($article['slug']) ?>">
+             href="/<?= slugify($article['titre']) ?>">
             Lire la suite →
           </a>
 

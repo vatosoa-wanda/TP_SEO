@@ -43,4 +43,25 @@ function requireLogin() {
         exit;
     }
 }
+
+// Fonction pour convertir un titre en slug URL-friendly
+// Exemple: "Contexte historique du conflit" → "contexte-historique-du-conflit"
+function slugify($text) {
+    // Convertir en minuscules
+    $text = strtolower($text);
+    
+    // Remplacer les espaces par des tirets
+    $text = str_replace(' ', '-', $text);
+    
+    // Remplacer les caractères spéciaux et accents
+    $text = preg_replace('/[^a-z0-9-]/', '', $text);
+    
+    // Remplacer les tirets multiples par un tiret unique
+    $text = preg_replace('/-+/', '-', $text);
+    
+    // Supprimer les tirets au début et à la fin
+    $text = trim($text, '-');
+    
+    return $text;
+}
 ?>
