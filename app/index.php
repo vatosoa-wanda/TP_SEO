@@ -197,12 +197,12 @@ $articles = $stmt->fetchAll();
       <h1>Le Monde</h1>
       <p>Actualités &amp; Analyses — Conflit en Iran</p>
     </div>
-    <?php if (isLoggedIn()): ?>
+    <!-- <?php if (isLoggedIn()): ?>
     <div class="user-info">
       Connecté : <strong><?= htmlspecialchars($_SESSION['admin_username']) ?></strong>
       <a href="admin/logout.php" class="btn-logout">Déconnexion</a>
     </div>
-    <?php endif; ?>
+    <?php endif; ?> -->
   </header>
 
   <!-- NAV -->
@@ -212,7 +212,7 @@ $articles = $stmt->fetchAll();
     <a href="#">Politique</a>
     <a href="#">Économie</a>
     <?php if (isLoggedIn()): ?>
-    <a href="/admin/list.php" style="color: #c00; font-weight: bold;">⚙️ Administration</a>
+    <!-- <a href="/admin/list.php" style="color: #c00; font-weight: bold;">⚙️ Administration</a> -->
     <?php endif; ?>
   </nav>
 
