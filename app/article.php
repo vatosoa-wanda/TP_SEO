@@ -24,7 +24,7 @@ if (!is_numeric($id)) {
     exit;
 }
 
-// Chercher l'article par l'ID
+// Récupérer l'article
 $stmt = $pdo->prepare("SELECT * FROM article WHERE id = :id LIMIT 1");
 $stmt->execute([':id' => $id]);
 $article = $stmt->fetch();
@@ -34,6 +34,11 @@ if (!$article) {
     header('Location: /');
     exit;
 }
+
+// Récupérer TOUTES les photos de l'article
+$stmt_photos = $pdo->prepare("SELECT photos FROM photos WHERE id_article = :id_article ORDER BY date_ajout ASC");
+$stmt_photos->execute([':id_article' => $article['id']]);
+$photos = $stmt_photos->fetchAll();
 
 // URL canonique absolue
 $base_url    = 'http://localhost:8080';
@@ -352,6 +357,21 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
         <p class="meta-description"><?= htmlspecialchars($article['meta_description']) ?></p>
       <?php endif; ?>
     </div>
+
+    <!-- PHOTOS DE L'ARTICLE -->
+    <?php if (!empty($photos)): ?>
+      <div class="article-contenu" style="padding: 35px 40px 20px; background: white; margin-bottom: 0;">
+        <h3 style="font-size: 1.3rem; margin-top: 0; margin-bottom: 20px;">Photos de l'article</h3>
+        <div class="photos-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+          <?php foreach ($photos as $photo): ?>
+            <img src="/uploads/<?= htmlspecialchars($photo['photos']) ?>" 
+                 alt="Photo article" 
+                 style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; transition: transform 0.2s;"
+                 loading="lazy">
+          <?php endforeach; ?>
+        </div>
+      </div>
+    <?php endif; ?>
 
     <!-- CONTENU TINYMCE -->
     <div class="article-contenu">

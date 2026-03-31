@@ -20,6 +20,18 @@ CREATE TABLE IF NOT EXISTS article (
     INDEX idx_date (date_creation)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ============================================
+-- Table des photos d'articles
+-- ============================================
+CREATE TABLE IF NOT EXISTS photos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_article INT NOT NULL,
+    photos VARCHAR(255) NOT NULL,
+    date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_article) REFERENCES article(id) ON DELETE CASCADE,
+    INDEX idx_article (id_article)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 -- ============================================
 -- Table des administrateurs (BackOffice)
@@ -75,3 +87,17 @@ INSERT IGNORE INTO article (titre, slug, contenu, meta_description, image_princi
     'Point sur les negotiations diplomatiques en cours concernant le conflit iranien.',
     NULL
 );
+
+-- ============================================
+-- Photos de demonstration (liens fictifs)
+-- ============================================
+-- Remarque: Les photos doivent être placées dans /app/uploads/
+-- Pour les tester, mettez des images .jpg dans le dossier uploads/
+
+INSERT IGNORE INTO photos (id_article, photos) VALUES
+(1, 'article-1-photo-1.jpg'),
+(1, 'article-1-photo-2.jpg'),
+(1, 'article-1-photo-3.jpg'),
+(2, 'article-2-photo-1.jpg'),
+(2, 'article-2-photo-2.jpg'),
+(3, 'article-3-photo-1.jpg');
