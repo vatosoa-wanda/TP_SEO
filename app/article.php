@@ -116,7 +116,7 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
     }
     header p {
       font-size: 0.9rem;
-      color: #aaa;
+      color: #ddd;
       margin-top: 5px;
     }
 
@@ -130,15 +130,15 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
       z-index: 100;
     }
     nav a {
-      color: #ddd;
-      text-decoration: none;
+      color: #fff;
+      text-decoration: underline;
       margin: 0 20px;
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-family: Arial, sans-serif;
     }
-    nav a:hover { color: white; border-bottom: 2px solid #c00; padding-bottom: 2px; }
+    nav a:hover { color: #c00; text-decoration: underline; text-decoration-thickness: 2px; }
     
     nav .search-bar {
       display: flex;
@@ -156,7 +156,7 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
       min-width: 150px;
     }
     nav .search-bar input::placeholder {
-      color: #999;
+      color: #666;
     }
     nav .search-bar input:focus {
       outline: none;
@@ -194,9 +194,9 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
       padding: 0 20px;
       font-family: Arial, sans-serif;
       font-size: 0.85rem;
-      color: #999;
+      color: #555;
     }
-    .breadcrumb a { color: #c00; text-decoration: none; }
+    .breadcrumb a { color: #c00; text-decoration: underline; }
     .breadcrumb a:hover { text-decoration: underline; }
 
     /* MAIN */
@@ -223,7 +223,7 @@ $contenu = preg_replace_callback('/<img[^>]+>/', function($match) use (&$premier
 
     .article-header .meta {
       font-size: 0.82rem;
-      color: #999;
+      color: #555;
       font-family: Arial, sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.5px;

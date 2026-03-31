@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .login-container p {
             text-align: center;
-            color: #666;
+            color: #555;
             font-size: 0.9rem;
             margin-bottom: 30px;
         }
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 4px;
             margin-top: 20px;
             font-size: 0.85rem;
-            color: #666;
+            color: #555;
             border-left: 4px solid #c00;
         }
 

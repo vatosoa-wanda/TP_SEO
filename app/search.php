@@ -60,7 +60,7 @@ if (!empty($query) && strlen($query) >= 2) {
     }
     header p {
       font-size: 0.9rem;
-      color: #aaa;
+      color: #ddd;
       margin-top: 5px;
     }
 
@@ -74,15 +74,15 @@ if (!empty($query) && strlen($query) >= 2) {
       z-index: 100;
     }
     nav a {
-      color: #ddd;
-      text-decoration: none;
+      color: #fff;
+      text-decoration: underline;
       margin: 0 20px;
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-family: Arial, sans-serif;
     }
-    nav a:hover { color: white; border-bottom: 2px solid #c00; padding-bottom: 2px; }
+    nav a:hover { color: #c00; text-decoration: underline; text-decoration-thickness: 2px; }
 
     /* MAIN */
     main {
@@ -108,7 +108,7 @@ if (!empty($query) && strlen($query) >= 2) {
       font-weight: bold;
     }
     .search-info .count {
-      color: #999;
+      color: #555;
       font-size: 0.9rem;
     }
 
@@ -185,15 +185,18 @@ if (!empty($query) && strlen($query) >= 2) {
     }
     .article-card h2 a {
       color: #1a1a1a;
-      text-decoration: none;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.2s;
     }
     .article-card h2 a:hover {
       color: #c00;
+      text-decoration-color: #c00;
     }
 
     .article-card .meta {
       font-size: 0.8rem;
-      color: #999;
+      color: #555;
       font-family: Arial, sans-serif;
       margin-bottom: 10px;
       text-transform: uppercase;
@@ -228,7 +231,7 @@ if (!empty($query) && strlen($query) >= 2) {
       background: white;
       padding: 40px 30px;
       text-align: center;
-      color: #999;
+      color: #555;
       border-radius: 4px;
     }
     .no-results p {
@@ -237,7 +240,7 @@ if (!empty($query) && strlen($query) >= 2) {
     }
     .no-results a {
       color: #c00;
-      text-decoration: none;
+      text-decoration: underline;
       font-weight: bold;
     }
     .no-results a:hover {
@@ -247,7 +250,7 @@ if (!empty($query) && strlen($query) >= 2) {
     /* Footer */
     footer {
       background: #1a1a1a;
-      color: #666;
+      color: #aaa;
       text-align: center;
       padding: 25px;
       margin-top: 60px;
